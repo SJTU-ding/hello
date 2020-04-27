@@ -1,0 +1,121 @@
+{
+        // Use IntelliSense to learn about possible attributes.
+        // Hover to view descriptions of existing attributes.
+        // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+        "version": "0.2.0",
+        "configurations": [
+                {
+                        "name": "vhost-zero-copy",
+                        "type": "cppdbg",
+                        "request": "launch",
+                        "program": "/home/xuan/dpdk_project/dpdk/x86_64-native-linuxapp-gcc/app/testpmd",
+                        "args": ["-n", "4", "-l", "2-4", "--socket-mem", "1024,1024", "--legacy-mem", "--file-prefix=vhost", "--vdev", "'net_vhost0,iface=vhost-net,queues=1,client=1,dequeue-zero-copy=1'", "--", "-i", "--nb-cores=1", "--txd=1024", "--rxd=1024", "--txfreet=992"],
+                        "stopAtEntry": false,
+                        "cwd": "${workspaceFolder}",
+                        "environment": [],
+                        "externalConsole": false,
+                        "MIMode": "gdb",
+                        "setupCommands": [
+                            {
+                                "description": "Enable pretty-printing for gdb",
+                                "text": "-enable-pretty-printing",
+                                "ignoreFailures": true
+                            }
+                        ]
+                },
+ 
+                {
+                        "name": "virtio-zero-copy",
+                        "type": "cppdbg",
+                        "request": "launch",
+                        "program": "/home/xuan/dpdk_project/dpdk/x86_64-native-linuxapp-gcc/app/testpmd",
+                        "args": ["-n", "4", "-l", "5-6", "--socket-mem", "1024,1024", "--legacy-mem", "--no-pci", "--file-prefix=virtio", "--vdev=net_virtio_user0,mac=00:01:02:03:04:05,path=./vhost-net,in_order=1,mrg_rxbuf=0,queue_size=1024,server=1", "--", "-i", "--tx-offloads=0x0", "--nb-cores=1", "--txd=1024", "--rxd=1024"],
+                        "stopAtEntry": false,
+                        "cwd": "${workspaceFolder}",
+                        "externalConsole": false,
+                        "MIMode": "gdb",
+                        "setupCommands": [
+                            {
+                                "description": "Enable pretty-printing for gdb",
+                                "text": "-enable-pretty-printing",
+                                "ignoreFailures": true
+                            }
+                        ]
+                },
+                {
+                        "name": "vhost_user",
+                        "type": "cppdbg",
+                        "request": "launch",
+                        "program": "/home/xuan/dpdk_project/dpdk/x86_64-native-linuxapp-gcc/app/testpmd",
+                        "args": [
+                                "-c",
+                                "0xe",
+                                "-n",
+                                "4",
+                                "--socket-mem",
+                                "1024,1024",
+                                "--legacy-mem",
+                                "--no-pci",
+                                "--file-prefix=vhost",
+                                "--vdev",
+                                "'eth_vhost0,iface=./vhost-net,client=1,queues=1'",
+                                "--",
+                                "-i",
+                                "--nb-cores=1",
+                                "--rxq=1",
+                                "--txq=1"
+                        ],
+                        "stopAtEntry": false,
+                        "cwd": "${workspaceFolder}",
+                        "environment": [],
+                        "externalConsole": false,
+                        "MIMode": "gdb",
+                        "setupCommands": [
+                                {
+                                        "description": "Enable pretty-printing for gdb",
+                                        "text": "-enable-pretty-printing",
+                                        "ignoreFailures": true
+                                }
+                        ]
+                },
+                {
+                        "name": "virtio_user",
+                        "type": "cppdbg",
+                        "request": "launch",
+                        "program": "/home/xuan/dpdk_project/dpdk/x86_64-native-linuxapp-gcc/app/testpmd",
+                        "args": [
+                                "-n",
+                                "4",
+                                "-l",
+                                "5-7",
+                                "--socket-mem",
+                                "1024,1024",
+                                "--legacy-mem",
+                                "--no-pci",
+                                "--file-prefix=virtio",
+                                "--vdev=net_virtio_user0,mac=00:01:02:03:04:05,path=./vhost-net,server=1,queues=1,packed_vq=1,mrg_rxbuf=1,in_order=1",
+                                "--",
+                                "-i",
+                                "--tx-offloads=0x0",
+                                "--enable-hw-vlan-strip",
+                                "--rss-ip",
+                                "--nb-cores=1",
+                                "--rxq=1",
+                                "--txq=1"
+                        ],
+                        "stopAtEntry": false,
+                        "cwd": "${workspaceFolder}",
+                        "environment": [],
+                        "externalConsole": false,
+                        "MIMode": "gdb",
+                        "setupCommands": [
+                                {
+                                        "description": "Enable pretty-printing for gdb",
+                                        "text": "-enable-pretty-printing",
+                                        "ignoreFailures": true
+                                }
+                        ]
+                },
+
+        ]
+}
